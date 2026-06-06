@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rose-400: #ff85c4;
+  --color-rose-500: #FF69B4;
+  --color-rose-600: #e6539a;
+  --color-soft-grey: #F5F5F5;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F5F5F5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #F5F5F5;
+  min-height: 100vh;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
