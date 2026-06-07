@@ -7,6 +7,7 @@ const connectDB = require('./src/config/db')
 const eventsRoute = require('./src/routes/events')
 const bookingsRoute = require('./src/routes/bookings')
 const authRoute = require('./src/routes/auth')
+const adminRoute = require('./src/routes/admin')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(express.json())
 app.use('/api/events', eventsRoute)
 app.use('/api/bookings', bookingsRoute)
 app.use('/api/auth', authRoute)
+app.use('/api/admin', adminRoute)
 
 app.get('/', (req, res) => res.send({ ok: true, message: 'Eventify API' }))
 

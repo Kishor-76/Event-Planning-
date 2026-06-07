@@ -27,7 +27,20 @@ export function AuthProvider({ children }) {
     setUser(userData)
   }
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      if (token) {
+        await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/logout`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+      }
+    } catch (err) {
+      console.error('Failed to notify backend of logout:', err)
+    }
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     setUser(null)

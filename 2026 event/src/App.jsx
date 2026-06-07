@@ -9,6 +9,7 @@ import CorporateEventPage from './pages/CorporateEventPage'
 import AnniversaryPage from './pages/AnniversaryPage'
 import BabyShowerPage from './pages/BabyShowerPage'
 import ProfilePage from './pages/ProfilePage'
+import AdminDashboardPage from './pages/AdminDashboardPage'
 import { ProtectedRoute } from './context/ProtectedRoute'
 
 function App() {
@@ -31,6 +32,11 @@ function App() {
         <Route path="/profile" element={
           <ProtectedRoute>
             <ProfilePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin" element={
+          <ProtectedRoute>
+            <AdminDashboardPage />
           </ProtectedRoute>
         } />
       </Routes>

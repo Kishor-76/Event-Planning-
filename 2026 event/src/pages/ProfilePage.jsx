@@ -1,5 +1,5 @@
-import { useState, useRef, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useRef, useContext, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import LocationSelector from '../components/LocationSelector'
@@ -7,8 +7,9 @@ import EventCountdown from '../components/EventCountdown'
 import PlanningProgressRing from '../components/PlanningProgressRing'
 import BudgetTracker from '../components/BudgetTracker'
 import WeatherWidget from '../components/WeatherWidget'
-import { Upload, MapPin, Calendar, CheckCircle, Heart, Settings, X, Plus, LogOut } from 'lucide-react'
+import { Upload, MapPin, Calendar, CheckCircle, Heart, Settings, X, Plus, LogOut, Users } from 'lucide-react'
 import { AuthContext } from '../context/AuthContext'
+import { fetchJSON, API_BASE } from '../utils/api'
 
 // India States and Cities data
 const INDIA_DATA = {
@@ -50,43 +51,104 @@ export default function ProfilePage() {
     bio: 'Event enthusiast and planner',
   })
 
+  // Sync user profile name with AuthContext user when user loads
+  useEffect(() => {
+    if (user?.name) {
+      setUserProfile(prev => ({ ...prev, name: user.name }))
+    }
+  }, [user])
+
   const [selectedPreferences, setSelectedPreferences] = useState(['Weddings', 'Corporate Events'])
   const [gallery, setGallery] = useState([
-    'https://images.unsplash.com/photo-1519671482677-504be0271101?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1551510519-df6f9dd95814?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1574158622147-e121b37d7d48?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1567427282903-cd8c1a73b59e?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1516417032154-ef48e5ee48b1?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1542200188-7ad90151afd4?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1505228395891-9a51e7e86e81?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1465014260857-11205520acde?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519671867637-269862aba59a?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1508020849624-e6bd2ae3e858?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1503803548695-659e1591dcab?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519671867637-269862aba59a?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1511674159375-cd50f7c4d3a3?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1519778520786-b63be92b675a?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1519671482777-1b3b22b152e2?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1482575832494-771f74bf6857?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21e?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1478812954026-9c750f0e89fc?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=450&fit=crop',
+    'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=600&h=450&fit=crop',
   ])
 
-  const [stats] = useState({
-    upcomingEvents: 5,
-    completedBookings: 12,
-    savedVenues: 8,
-  })
+  const [userBookings, setUserBookings] = useState([])
+  const [bookingsLoading, setBookingsLoading] = useState(true)
 
-  // Sample upcoming event - set to 7 days from now
-  const upcomingEventDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+  useEffect(() => {
+    let active = true
+    const fetchMyBookings = async () => {
+      if (!user?.email) return
+      try {
+        const data = await fetchJSON(`${API_BASE}/api/bookings?email=${user.email}`)
+        if (active) {
+          setUserBookings(data)
+        }
+      } catch (err) {
+        console.error('Failed to load bookings:', err)
+      } finally {
+        if (active) {
+          setBookingsLoading(false)
+        }
+      }
+    }
+    fetchMyBookings()
+    return () => {
+      active = false
+    }
+  }, [user])
+
+  // Compute real stats from bookings
+  const upcomingCount = userBookings.filter(b => {
+    const bookingDate = new Date(b.date)
+    return bookingDate >= new Date().setHours(0,0,0,0)
+  }).length
+
+  const completedCount = userBookings.filter(b => {
+    const bookingDate = new Date(b.date)
+    return bookingDate < new Date().setHours(0,0,0,0)
+  }).length
+
+  const uniqueVenues = [...new Set(userBookings.map(b => b.venue))].filter(Boolean).length
+
+  const stats = {
+    upcomingEvents: upcomingCount,
+    completedBookings: completedCount,
+    savedVenues: uniqueVenues || 0
+  }
+
+  // Find next upcoming booking
+  const upcomingBookings = userBookings
+    .filter(b => {
+      const bookingDate = new Date(b.date)
+      return bookingDate >= new Date().setHours(0,0,0,0)
+    })
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+
+  const nextBooking = upcomingBookings[0]
+  
+  const upcomingEventDate = nextBooking 
+    ? new Date(nextBooking.date).toISOString() 
+    : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+
+  const upcomingEventTitle = nextBooking 
+    ? (nextBooking.event ? nextBooking.event.title : `Event at ${nextBooking.venue}`)
+    : "Sunset Garden Wedding"
 
   const [isEditingProfile, setIsEditingProfile] = useState(false)
   const [editForm, setEditForm] = useState(userProfile)
@@ -322,8 +384,73 @@ export default function ProfilePage() {
           <div className="mb-8">
             <EventCountdown 
               eventDate={upcomingEventDate}
-              eventTitle="Sunset Garden Wedding"
+              eventTitle={upcomingEventTitle}
             />
+          </div>
+
+          {/* My Booked Events Section */}
+          <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-xl border border-white/50">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Calendar size={28} className="text-rose-500" />
+              My Booked Events
+            </h2>
+            {bookingsLoading ? (
+              <div className="flex justify-center items-center py-6">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500" />
+              </div>
+            ) : userBookings.length === 0 ? (
+              <div className="text-center py-10 bg-white/20 rounded-2xl border border-dashed border-gray-300">
+                <p className="text-gray-500 text-lg mb-4">You have not booked any events yet.</p>
+                <Link
+                  to="/events"
+                  className="px-6 py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-xl transition-all shadow-md hover:shadow-lg"
+                >
+                  Discover Events
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {userBookings.map((booking) => (
+                  <div
+                    key={booking._id || booking.id}
+                    className="bg-white/80 rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex justify-between items-start gap-4 mb-4">
+                      <div>
+                        <h3 className="font-bold text-gray-900 text-lg">
+                          {booking.event ? booking.event.title : 'Custom Occasion'}
+                        </h3>
+                        <span className="inline-block mt-1 px-2.5 py-0.5 bg-rose-50 text-rose-600 rounded-full text-xs font-medium border border-rose-100">
+                          {booking.event ? booking.event.category : 'Custom'}
+                        </span>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold border uppercase tracking-wider ${
+                        booking.status === 'confirmed'
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                          : 'bg-amber-50 text-amber-700 border-amber-200'
+                      }`}>
+                        {booking.status || 'pending'}
+                      </span>
+                    </div>
+                    
+                    <div className="space-y-2 text-gray-600 text-sm">
+                      <div className="flex items-center gap-2">
+                        <MapPin size={16} className="text-gray-400" />
+                        <span>{booking.venue || 'To Be Confirmed'}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar size={16} className="text-gray-400" />
+                        <span>{booking.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users size={16} className="text-gray-400" />
+                        <span>{booking.guests} Guests</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Planning Progress Ring */}

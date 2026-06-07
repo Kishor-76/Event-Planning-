@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { logActivity } = require('../utils/activityLogger')
 
 exports.register = async (req, res) => {
   try {
@@ -10,6 +11,15 @@ exports.register = async (req, res) => {
     const hashed = await bcrypt.hash(password, 10)
     const user = new User({ email, password: hashed, name })
     const saved = await user.save()
+    
+    await logActivity({
+      userId: saved._id,
+      userName: saved.name,
+      userEmail: saved.email,
+      action: 'REGISTER',
+      details: 'User registered a new account',
+    })
+
     res.status(201).json({ id: saved._id, email: saved.email, name: saved.name })
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -24,6 +34,15 @@ exports.login = async (req, res) => {
     const match = await bcrypt.compare(password, user.password)
     if (!match) return res.status(400).json({ message: 'Invalid credentials' })
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'change_this_secret', { expiresIn: '7d' })
+    
+    await logActivity({
+      userId: user._id,
+      userName: user.name,
+      userEmail: user.email,
+      action: 'LOGIN',
+      details: 'User logged in successfully',
+    })
+
     res.json({ token })
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -34,6 +53,24 @@ exports.me = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password')
     res.json(user)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+}
+
+exports.logout = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId)
+    if (user) {
+      await logActivity({
+        userId: user._id,
+        userName: user.name,
+        userEmail: user.email,
+        action: 'LOGOUT',
+        details: 'User logged out',
+      })
+    }
+    res.json({ success: true, message: 'Logged out successfully' })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }

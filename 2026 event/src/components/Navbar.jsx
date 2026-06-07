@@ -22,6 +22,7 @@ export default function Navbar() {
 
   if (user) {
     navLinks.push({ to: '/profile', label: 'Profile' })
+    navLinks.push({ to: '/admin', label: 'Admin Panel' })
   } else {
     navLinks.push({ to: '/login', label: 'Login' })
   }

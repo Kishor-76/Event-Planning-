@@ -1,6 +1,35 @@
 {
-  "users": [],
-  "bookings": [],
+  "users": [
+    {
+      "email": "Kishorgorai2004@gmail.com",
+      "password": "$2a$10$U1oCQ0vtZ2b2J34hPgl6NeREEL5xGDn.VKaHbAJNPW3zwE2m8cwim",
+      "name": "kishor gorai ",
+      "_id": "6a251c04a60ff297240a5fa5",
+      "createdAt": "2026-06-07T07:21:40.383Z",
+      "updatedAt": "2026-06-07T07:21:40.383Z"
+    },
+    {
+      "email": "goraikishor404@gmail.com",
+      "password": "$2a$10$TMNvzYYOS6BARgzlemo.1uc0ZPePX45XdjhbWJIOBDL6H1NDEH3zK",
+      "name": "ani",
+      "_id": "6a25481490fd2a4aa8d0da81",
+      "createdAt": "2026-06-07T10:29:40.073Z",
+      "updatedAt": "2026-06-07T10:29:40.073Z"
+    }
+  ],
+  "bookings": [
+    {
+      "date": "2026-08-29",
+      "venue": "The Oberoi Bangalore",
+      "guests": 500,
+      "name": "ani",
+      "email": "goraikishor404@gmail.com",
+      "status": "pending",
+      "_id": "6a25486964d7edc1ea1dac10",
+      "createdAt": "2026-06-07T10:31:05.783Z",
+      "updatedAt": "2026-06-07T10:31:05.783Z"
+    }
+  ],
   "events": [
     {
       "_id": "6a2510a3a92aa03fb948cdb1",
@@ -67,6 +96,52 @@
       "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600",
       "createdAt": "2026-06-07T06:33:07.118Z",
       "updatedAt": "2026-06-07T06:33:07.118Z"
+    }
+  ],
+  "activitylogs": [
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "LOGOUT",
+      "details": "User logged out",
+      "_id": "6a2547f5e565c937edaa7eb7",
+      "timestamp": "2026-06-07T10:29:09.970Z",
+      "createdAt": "2026-06-07T10:29:09.977Z",
+      "updatedAt": "2026-06-07T10:29:09.977Z"
+    },
+    {
+      "userId": "6a25481490fd2a4aa8d0da81",
+      "userName": "ani",
+      "userEmail": "goraikishor404@gmail.com",
+      "action": "REGISTER",
+      "details": "User registered a new account",
+      "_id": "6a25481490fd2a4aa8d0da82",
+      "timestamp": "2026-06-07T10:29:40.077Z",
+      "createdAt": "2026-06-07T10:29:40.077Z",
+      "updatedAt": "2026-06-07T10:29:40.077Z"
+    },
+    {
+      "userId": "6a25481490fd2a4aa8d0da81",
+      "userName": "ani",
+      "userEmail": "goraikishor404@gmail.com",
+      "action": "LOGIN",
+      "details": "User logged in successfully",
+      "_id": "6a25483031251913814ff8d7",
+      "timestamp": "2026-06-07T10:30:08.051Z",
+      "createdAt": "2026-06-07T10:30:08.052Z",
+      "updatedAt": "2026-06-07T10:30:08.052Z"
+    },
+    {
+      "userId": "6a25481490fd2a4aa8d0da81",
+      "userName": "ani",
+      "userEmail": "goraikishor404@gmail.com",
+      "action": "CREATE_BOOKING",
+      "details": "Created a booking at The Oberoi Bangalore for date 2026-08-29 with 500 guests",
+      "_id": "6a25486964d7edc1ea1dac11",
+      "timestamp": "2026-06-07T10:31:05.786Z",
+      "createdAt": "2026-06-07T10:31:05.787Z",
+      "updatedAt": "2026-06-07T10:31:05.787Z"
     }
   ]
 }
