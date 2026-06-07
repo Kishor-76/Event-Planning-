@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { AuthContext } from '../context/AuthContext'
 
@@ -7,6 +7,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const { user } = useContext(AuthContext)
+  const location = useLocation()
+
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -27,11 +30,13 @@ export default function Navbar() {
     navLinks.push({ to: '/login', label: 'Login' })
   }
 
+  const textColor = (isHome && !scrolled) ? 'text-white' : 'text-gray-700'
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-rose-500/10'
+        scrolled || !isHome
+          ? 'bg-white/85 backdrop-blur-xl shadow-lg shadow-rose-500/5 border-b border-gray-100'
           : 'bg-white/20 backdrop-blur-md'
       }`}
     >
@@ -45,16 +50,14 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`font-medium transition-colors duration-300 hover:text-rose-500 ${
-                  scrolled ? 'text-gray-700' : 'text-white'
-                }`}
+                className={`font-medium transition-colors duration-300 hover:text-rose-500 ${textColor}`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
           <button
-            className={`md:hidden p-2 ${scrolled ? 'text-gray-700' : 'text-white'}`}
+            className={`md:hidden p-2 ${textColor}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >

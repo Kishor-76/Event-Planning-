@@ -75,3 +75,26 @@ exports.logout = async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 }
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const { name, state, city, bio, avatar } = req.body
+    const updated = await User.findByIdAndUpdate(
+      req.userId,
+      { name, state, city, bio, avatar },
+      { new: true }
+    ).select('-password')
+    
+    await logActivity({
+      userId: updated._id,
+      userName: updated.name,
+      userEmail: updated.email,
+      action: 'UPDATE_PROFILE',
+      details: `Updated profile details: State=${updated.state}, City=${updated.city}`,
+    })
+    
+    res.json(updated)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+}

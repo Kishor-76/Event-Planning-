@@ -40,21 +40,28 @@ const EVENT_PREFERENCES = [
 
 export default function ProfilePage() {
   const navigate = useNavigate()
-  const { user, logout } = useContext(AuthContext)
+  const { user, logout, updateUser } = useContext(AuthContext)
 
   const [userProfile, setUserProfile] = useState({
     name: user?.name || 'John Doe',
     badge: 'Member',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-    state: 'Maharashtra',
-    city: 'Mumbai',
-    bio: 'Event enthusiast and planner',
+    avatar: user?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
+    state: user?.state || 'Maharashtra',
+    city: user?.city || 'Mumbai',
+    bio: user?.bio || 'Event enthusiast and planner',
   })
 
-  // Sync user profile name with AuthContext user when user loads
+  // Sync user profile with AuthContext user when user loads
   useEffect(() => {
-    if (user?.name) {
-      setUserProfile(prev => ({ ...prev, name: user.name }))
+    if (user) {
+      setUserProfile(prev => ({
+        ...prev,
+        name: user.name || prev.name,
+        avatar: user.avatar || prev.avatar,
+        state: user.state || prev.state,
+        city: user.city || prev.city,
+        bio: user.bio || prev.bio,
+      }))
     }
   }, [user])
 
@@ -166,8 +173,24 @@ export default function ProfilePage() {
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onloadend = () => {
-        setUserProfile((prev) => ({ ...prev, avatar: reader.result }))
+      reader.onloadend = async () => {
+        const newAvatar = reader.result
+        setUserProfile((prev) => ({ ...prev, avatar: newAvatar }))
+        try {
+          const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+            method: 'PUT',
+            body: JSON.stringify({
+              name: userProfile.name,
+              bio: userProfile.bio,
+              state: userProfile.state,
+              city: userProfile.city,
+              avatar: newAvatar,
+            })
+          })
+          updateUser(updatedUser)
+        } catch (err) {
+          console.error('Failed to save avatar:', err)
+        }
       }
       reader.readAsDataURL(file)
     }
@@ -186,9 +209,23 @@ export default function ProfilePage() {
     }
   }
 
-  const handleProfileSave = () => {
-    setUserProfile(editForm)
-    setIsEditingProfile(false)
+  const handleProfileSave = async () => {
+    try {
+      const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: editForm.name,
+          bio: editForm.bio,
+          state: editForm.state,
+          city: editForm.city,
+          avatar: userProfile.avatar,
+        })
+      })
+      updateUser(updatedUser)
+      setIsEditingProfile(false)
+    } catch (err) {
+      alert('Failed to update profile: ' + err.message)
+    }
   }
 
   const handlePreferenceToggle = (pref) => {
@@ -467,8 +504,23 @@ export default function ProfilePage() {
             <LocationSelector 
               initialState={userProfile.state}
               initialCity={userProfile.city}
-              onLocationChange={(state, city) => {
+              onLocationChange={async (state, city) => {
                 setUserProfile(prev => ({ ...prev, state, city }))
+                try {
+                  const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                      name: userProfile.name,
+                      bio: userProfile.bio,
+                      state,
+                      city,
+                      avatar: userProfile.avatar,
+                    })
+                  })
+                  updateUser(updatedUser)
+                } catch (err) {
+                  console.error('Failed to save location change:', err)
+                }
               }}
             />
           </div>
