@@ -7,7 +7,8 @@
     "dev:backend": "cd \"Event Planning Backend/Event Planning Backend\" && npm run dev",
     "build": "cd \"2026 event\" && npm run build",
     "lint": "cd \"2026 event\" && npm run lint",
-    "preview": "cd \"2026 event\" && npm run preview"
+    "preview": "cd \"2026 event\" && npm run preview",
+    "seed": "cd \"Event Planning Backend/Event Planning Backend\" && npm run seed"
   },
   "devDependencies": {
     "concurrently": "^10.0.3"
