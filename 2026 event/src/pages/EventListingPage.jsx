@@ -64,7 +64,7 @@ export default function EventListingPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#F5F5F5] pt-24 pb-16">
+      <div className="min-h-screen bg-[#F5F5F5] pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">

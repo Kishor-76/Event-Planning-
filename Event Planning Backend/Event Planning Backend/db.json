@@ -176,6 +176,17 @@
       "timestamp": "2026-06-07T18:33:38.166Z",
       "createdAt": "2026-06-07T18:33:38.168Z",
       "updatedAt": "2026-06-07T18:33:38.168Z"
+    },
+    {
+      "userId": "6a25481490fd2a4aa8d0da81",
+      "userName": "ani",
+      "userEmail": "goraikishor404@gmail.com",
+      "action": "LOGOUT",
+      "details": "User logged out",
+      "_id": "6a2638c9216274f0079a26eb",
+      "timestamp": "2026-06-08T03:36:41.215Z",
+      "createdAt": "2026-06-08T03:36:41.220Z",
+      "updatedAt": "2026-06-08T03:36:41.220Z"
     }
   ]
 }

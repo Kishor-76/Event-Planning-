@@ -103,7 +103,7 @@ export default function Navbar() {
                   {dropdownOpen && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2.5 z-55 origin-top-right transform scale-100 transition-all"
+                      className="absolute right-0 top-full mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2.5 z-55 origin-top-right transform scale-100 transition-all"
                     >
                       {/* User Info Header */}
                       <div className="px-4 py-3 border-b border-gray-50 mb-1">

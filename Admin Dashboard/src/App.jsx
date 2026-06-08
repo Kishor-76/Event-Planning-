@@ -17,9 +17,7 @@ import {
 } from 'lucide-react'
 
 export default function App() {
-  const [authorized, setAuthorized] = useState(() => {
-    return sessionStorage.getItem('admin_authorized') === 'true'
-  })
+  const [authorized, setAuthorized] = useState(false)
   const [pin, setPin] = useState(['', '', '', ''])
   const [pinError, setPinError] = useState('')
 
@@ -55,7 +53,6 @@ export default function App() {
     if (pinStr.length === 4) {
       if (pinStr === '0312') {
         setAuthorized(true)
-        sessionStorage.setItem('admin_authorized', 'true')
       } else {
         setPinError('Incorrect passcode. Access denied.')
         setPin(['', '', '', ''])
@@ -102,7 +99,6 @@ export default function App() {
     const pinStr = pin.join('')
     if (pinStr === '0312') {
       setAuthorized(true)
-      sessionStorage.setItem('admin_authorized', 'true')
     } else {
       setPinError('Incorrect passcode. Access denied.')
       setPin(['', '', '', ''])
