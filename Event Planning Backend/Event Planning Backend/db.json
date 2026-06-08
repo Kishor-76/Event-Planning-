@@ -15,6 +15,18 @@
       "_id": "6a25481490fd2a4aa8d0da81",
       "createdAt": "2026-06-07T10:29:40.073Z",
       "updatedAt": "2026-06-07T10:29:40.073Z"
+    },
+    {
+      "email": "goraikishor407@gmail.com",
+      "password": "$2a$10$x/Vm.wpocJ7nNomnL8WTJer4n9Oug4aoWedqU/hZMe2IL.LUO/qBu",
+      "name": "aaaaa",
+      "state": "Maharashtra",
+      "city": "Mumbai",
+      "bio": "Event enthusiast and planner",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+      "_id": "6a25b9799cd17844ef6915cc",
+      "createdAt": "2026-06-07T18:33:29.856Z",
+      "updatedAt": "2026-06-07T18:33:29.856Z"
     }
   ],
   "bookings": [
@@ -142,6 +154,28 @@
       "timestamp": "2026-06-07T10:31:05.786Z",
       "createdAt": "2026-06-07T10:31:05.787Z",
       "updatedAt": "2026-06-07T10:31:05.787Z"
+    },
+    {
+      "userId": "6a25b9799cd17844ef6915cc",
+      "userName": "aaaaa",
+      "userEmail": "goraikishor407@gmail.com",
+      "action": "REGISTER",
+      "details": "User registered a new account",
+      "_id": "6a25b9799cd17844ef6915cd",
+      "timestamp": "2026-06-07T18:33:29.866Z",
+      "createdAt": "2026-06-07T18:33:29.867Z",
+      "updatedAt": "2026-06-07T18:33:29.867Z"
+    },
+    {
+      "userId": "6a25b9799cd17844ef6915cc",
+      "userName": "aaaaa",
+      "userEmail": "goraikishor407@gmail.com",
+      "action": "LOGIN",
+      "details": "User logged in successfully",
+      "_id": "6a25b982337535c21665404b",
+      "timestamp": "2026-06-07T18:33:38.166Z",
+      "createdAt": "2026-06-07T18:33:38.168Z",
+      "updatedAt": "2026-06-07T18:33:38.168Z"
     }
   ]
 }

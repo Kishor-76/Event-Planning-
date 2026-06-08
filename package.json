@@ -2,9 +2,10 @@
   "name": "project-wrapper",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:admin\"",
     "dev:frontend": "cd \"2026 event\" && npm run dev",
     "dev:backend": "cd \"Event Planning Backend/Event Planning Backend\" && npm run dev",
+    "dev:admin": "cd \"Admin Dashboard\" && npm run dev",
     "build": "cd \"2026 event\" && npm run build",
     "lint": "cd \"2026 event\" && npm run lint",
     "preview": "cd \"2026 event\" && npm run preview",
