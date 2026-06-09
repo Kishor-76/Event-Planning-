@@ -7,7 +7,7 @@ import EventCountdown from '../components/EventCountdown'
 import PlanningProgressRing from '../components/PlanningProgressRing'
 import BudgetTracker from '../components/BudgetTracker'
 import WeatherWidget from '../components/WeatherWidget'
-import { Upload, MapPin, Calendar, CheckCircle, Heart, Settings, X, Plus, LogOut, Users } from 'lucide-react'
+import { Upload, MapPin, Calendar, CheckCircle, Heart, Settings, X, Plus, LogOut, Users, Play, Video, Image, Trash2, Maximize2 } from 'lucide-react'
 import { AuthContext } from '../context/AuthContext'
 import { fetchJSON, API_BASE } from '../utils/api'
 
@@ -38,6 +38,24 @@ const EVENT_PREFERENCES = [
   'Networking',
 ]
 
+const DEFAULT_PHOTOS = [
+  'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=450&fit=crop',
+  'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&h=450&fit=crop'
+]
+
+const DEFAULT_VIDEOS = [
+  'https://assets.mixkit.co/videos/preview/mixkit-wedding-couple-dancing-under-lights-40019-large.mp4',
+  'https://assets.mixkit.co/videos/preview/mixkit-champagne-glasses-toast-at-a-celebration-40003-large.mp4',
+  'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-dj-playing-music-at-a-club-42526-large.mp4'
+]
+
 export default function ProfilePage() {
   const navigate = useNavigate()
   const { user, logout, updateUser } = useContext(AuthContext)
@@ -51,6 +69,14 @@ export default function ProfilePage() {
     bio: user?.bio || 'Event enthusiast and planner',
   })
 
+  const [selectedPreferences, setSelectedPreferences] = useState(user?.preferences || [])
+  const [gallery, setGallery] = useState(user?.gallery && user.gallery.length > 0 ? user.gallery : DEFAULT_PHOTOS)
+  const [videos, setVideos] = useState(user?.videos && user.videos.length > 0 ? user.videos : DEFAULT_VIDEOS)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const [galleryTab, setGalleryTab] = useState('photos')
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+  const [activeVideoUrl, setActiveVideoUrl] = useState(null)
+
   // Sync user profile with AuthContext user when user loads
   useEffect(() => {
     if (user) {
@@ -62,37 +88,11 @@ export default function ProfilePage() {
         city: user.city || prev.city,
         bio: user.bio || prev.bio,
       }))
+      setSelectedPreferences(user.preferences || [])
+      setGallery(user.gallery && user.gallery.length > 0 ? user.gallery : DEFAULT_PHOTOS)
+      setVideos(user.videos && user.videos.length > 0 ? user.videos : DEFAULT_VIDEOS)
     }
   }, [user])
-
-  const [selectedPreferences, setSelectedPreferences] = useState(['Weddings', 'Corporate Events'])
-  const [gallery, setGallery] = useState([
-    'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1519671482777-1b3b22b152e2?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1482575832494-771f74bf6857?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21e?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1478812954026-9c750f0e89fc?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=450&fit=crop',
-    'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=600&h=450&fit=crop',
-  ])
 
   const [userBookings, setUserBookings] = useState([])
   const [bookingsLoading, setBookingsLoading] = useState(true)
@@ -161,6 +161,7 @@ export default function ProfilePage() {
   const [editForm, setEditForm] = useState(userProfile)
   const fileInputRef = useRef(null)
   const galleryInputRef = useRef(null)
+  const videoInputRef = useRef(null)
 
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
@@ -185,6 +186,9 @@ export default function ProfilePage() {
               state: userProfile.state,
               city: userProfile.city,
               avatar: newAvatar,
+              preferences: selectedPreferences,
+              gallery,
+              videos,
             })
           })
           updateUser(updatedUser)
@@ -199,12 +203,77 @@ export default function ProfilePage() {
   const handleGalleryUpload = (e) => {
     const files = e.target.files
     if (files) {
-      Array.from(files).forEach((file) => {
-        const reader = new FileReader()
-        reader.onloadend = () => {
-          setGallery((prev) => [...prev, reader.result])
+      const fileList = Array.from(files)
+      const readers = fileList.map((file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader()
+          reader.onloadend = () => resolve(reader.result)
+          reader.readAsDataURL(file)
+        })
+      })
+
+      Promise.all(readers).then(async (newImages) => {
+        const nextGallery = [...gallery, ...newImages]
+        setGallery(nextGallery)
+        try {
+          const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+            method: 'PUT',
+            body: JSON.stringify({
+              name: userProfile.name,
+              bio: userProfile.bio,
+              state: userProfile.state,
+              city: userProfile.city,
+              avatar: userProfile.avatar,
+              preferences: selectedPreferences,
+              gallery: nextGallery,
+              videos,
+            })
+          })
+          updateUser(updatedUser)
+        } catch (err) {
+          console.error('Failed to save gallery changes:', err)
         }
-        reader.readAsDataURL(file)
+      })
+    }
+  }
+
+  const handleVideoUpload = (e) => {
+    const files = e.target.files
+    if (files) {
+      const fileList = Array.from(files)
+      const readers = fileList.map((file) => {
+        if (file.size > 15 * 1024 * 1024) {
+          alert(`Video size should be less than 15MB: ${file.name}`)
+          return null
+        }
+        return new Promise((resolve) => {
+          const reader = new FileReader()
+          reader.onloadend = () => resolve(reader.result)
+          reader.readAsDataURL(file)
+        })
+      }).filter(Boolean)
+
+      Promise.all(readers).then(async (newVideos) => {
+        const nextVideos = [...videos, ...newVideos]
+        setVideos(nextVideos)
+        try {
+          const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+            method: 'PUT',
+            body: JSON.stringify({
+              name: userProfile.name,
+              bio: userProfile.bio,
+              state: userProfile.state,
+              city: userProfile.city,
+              avatar: userProfile.avatar,
+              preferences: selectedPreferences,
+              gallery,
+              videos: nextVideos,
+            })
+          })
+          updateUser(updatedUser)
+        } catch (err) {
+          console.error('Failed to save video changes:', err)
+        }
       })
     }
   }
@@ -219,6 +288,9 @@ export default function ProfilePage() {
           state: editForm.state,
           city: editForm.city,
           avatar: userProfile.avatar,
+          preferences: selectedPreferences,
+          gallery,
+          videos,
         })
       })
       updateUser(updatedUser)
@@ -228,14 +300,75 @@ export default function ProfilePage() {
     }
   }
 
-  const handlePreferenceToggle = (pref) => {
-    setSelectedPreferences((prev) =>
-      prev.includes(pref) ? prev.filter((p) => p !== pref) : [...prev, pref]
-    )
+  const handlePreferenceToggle = async (pref) => {
+    const nextPrefs = selectedPreferences.includes(pref)
+      ? selectedPreferences.filter((p) => p !== pref)
+      : [...selectedPreferences, pref]
+    setSelectedPreferences(nextPrefs)
+    try {
+      const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: userProfile.name,
+          bio: userProfile.bio,
+          state: userProfile.state,
+          city: userProfile.city,
+          avatar: userProfile.avatar,
+          preferences: nextPrefs,
+          gallery,
+          videos,
+        })
+      })
+      updateUser(updatedUser)
+    } catch (err) {
+      console.error('Failed to update event preferences:', err)
+    }
   }
 
-  const removeGalleryImage = (index) => {
-    setGallery((prev) => prev.filter((_, i) => i !== index))
+  const removeGalleryImage = async (index) => {
+    const nextGallery = gallery.filter((_, i) => i !== index)
+    setGallery(nextGallery)
+    try {
+      const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: userProfile.name,
+          bio: userProfile.bio,
+          state: userProfile.state,
+          city: userProfile.city,
+          avatar: userProfile.avatar,
+          preferences: selectedPreferences,
+          gallery: nextGallery,
+          videos,
+        })
+      })
+      updateUser(updatedUser)
+    } catch (err) {
+      console.error('Failed to delete image:', err)
+    }
+  }
+
+  const removeGalleryVideo = async (index) => {
+    const nextVideos = videos.filter((_, i) => i !== index)
+    setVideos(nextVideos)
+    try {
+      const updatedUser = await fetchJSON(`${API_BASE}/api/auth/profile`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: userProfile.name,
+          bio: userProfile.bio,
+          state: userProfile.state,
+          city: userProfile.city,
+          avatar: userProfile.avatar,
+          preferences: selectedPreferences,
+          gallery,
+          videos: nextVideos,
+        })
+      })
+      updateUser(updatedUser)
+    } catch (err) {
+      console.error('Failed to delete video:', err)
+    }
   }
 
   const cities = INDIA_DATA[editForm.state] || []
@@ -519,6 +652,9 @@ export default function ProfilePage() {
                       state,
                       city,
                       avatar: userProfile.avatar,
+                      preferences: selectedPreferences,
+                      gallery,
+                      videos,
                     })
                   })
                   updateUser(updatedUser)
@@ -549,55 +685,320 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Event Gallery */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/50">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">Event Gallery</h2>
-              <button
-                onClick={() => galleryInputRef.current?.click()}
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-500 hover:shadow-lg hover:shadow-rose-500/40 text-white font-semibold rounded-xl transition-all"
-              >
-                <Plus size={20} /> Add Photos
-              </button>
-              <input
-                ref={galleryInputRef}
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleGalleryUpload}
-                className="hidden"
-              />
+          {/* Event Gallery Preview */}
+          <div 
+            onClick={() => setIsGalleryOpen(true)}
+            className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/50 hover:shadow-2xl transition-all cursor-pointer group relative overflow-hidden"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Event Gallery</h2>
+                <p className="text-gray-500 text-sm mt-1">
+                  {gallery.length} Photos • {videos.length} Videos
+                </p>
+              </div>
+              <span className="px-4 py-2 bg-gradient-to-r from-rose-500 to-purple-500 text-white font-semibold rounded-xl text-sm opacity-90 group-hover:opacity-100 transition-opacity">
+                Open Gallery
+              </span>
             </div>
 
-            {gallery.length === 0 ? (
-              <div className="text-center py-12">
+            {gallery.length === 0 && videos.length === 0 ? (
+              <div className="text-center py-12 bg-white/20 rounded-2xl border border-dashed border-gray-300">
                 <Upload size={48} className="mx-auto text-gray-300 mb-4" />
-                <p className="text-gray-500 text-lg">No photos yet. Upload your first event photo!</p>
+                <p className="text-gray-500 text-lg">No photos or videos yet. Click to start building your gallery!</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {gallery.map((image, idx) => (
-                  <div
-                    key={idx}
-                    className="group relative overflow-hidden rounded-2xl aspect-square shadow-lg hover:shadow-2xl transition-all"
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                {[
+                  ...gallery.slice(0, 4).map((src, idx) => ({ type: 'image', src, originalIndex: idx })),
+                  ...videos.slice(0, 2).map((src, idx) => ({ type: 'video', src, originalIndex: idx }))
+                ].map((item, index) => (
+                  <div 
+                    key={index}
+                    className="relative aspect-square rounded-2xl overflow-hidden shadow-sm group-hover:shadow-md transition-all border border-white/30"
                   >
-                    <img
-                      src={image}
-                      alt={`Event ${idx + 1}`}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <button
-                      onClick={() => removeGalleryImage(idx)}
-                      className="absolute bottom-4 right-4 p-2 bg-red-500 hover:bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all transform hover:scale-110"
-                    >
-                      <X size={20} />
-                    </button>
+                    {item.type === 'image' ? (
+                      <img 
+                        src={item.src} 
+                        alt="Preview" 
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-950 flex items-center justify-center relative">
+                        <video 
+                          src={item.src} 
+                          className="w-full h-full object-cover opacity-60" 
+                          muted 
+                          playsInline 
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                          <Play size={24} className="text-white fill-white drop-shadow-lg" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             )}
           </div>
+
+          {/* Fullscreen Interactive Gallery Modal */}
+          {isGalleryOpen && (
+            <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-0 md:p-6 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-xl w-full h-full md:max-w-6xl md:h-[85vh] md:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                
+                {/* Modal Header */}
+                <div className="px-6 py-5 border-b border-gray-200 flex items-center justify-between bg-white/70">
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Event Media Gallery</h2>
+                    <p className="text-sm text-gray-500">Manage and browse your wedding & corporate event memories</p>
+                  </div>
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsGalleryOpen(false);
+                    }}
+                    className="p-2 hover:bg-gray-150 rounded-full transition-all text-gray-600 hover:text-gray-950"
+                  >
+                    <X size={26} />
+                  </button>
+                </div>
+
+                {/* Tab Controls and Actions */}
+                <div className="px-6 py-4 bg-gray-50/50 border-b border-gray-100 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                  {/* Two Separate Sections Tabs */}
+                  <div className="flex bg-gray-200/60 p-1 rounded-xl w-full sm:w-auto">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setGalleryTab('photos');
+                      }}
+                      className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                        galleryTab === 'photos' 
+                          ? 'bg-white text-gray-900 shadow-md' 
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      <Image size={18} /> Photos ({gallery.length})
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setGalleryTab('videos');
+                      }}
+                      className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                        galleryTab === 'videos' 
+                          ? 'bg-white text-gray-900 shadow-md' 
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      <Video size={18} /> Videos ({videos.length})
+                    </button>
+                  </div>
+
+                  {/* Upload Actions */}
+                  <div onClick={(e) => e.stopPropagation()}>
+                    {galleryTab === 'photos' ? (
+                      <>
+                        <button
+                          onClick={() => galleryInputRef.current?.click()}
+                          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-purple-500 hover:shadow-md text-white font-semibold rounded-xl text-sm transition-all"
+                        >
+                          <Plus size={18} /> Add Photos
+                        </button>
+                        <input
+                          ref={galleryInputRef}
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          onChange={handleGalleryUpload}
+                          className="hidden"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => videoInputRef.current?.click()}
+                          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-purple-500 hover:shadow-md text-white font-semibold rounded-xl text-sm transition-all"
+                        >
+                          <Plus size={18} /> Add Videos
+                        </button>
+                        <input
+                          ref={videoInputRef}
+                          type="file"
+                          multiple
+                          accept="video/*"
+                          onChange={handleVideoUpload}
+                          className="hidden"
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Gallery Content Area */}
+                <div className="flex-1 overflow-y-auto p-6 bg-white" onClick={(e) => e.stopPropagation()}>
+                  {galleryTab === 'photos' ? (
+                    gallery.length === 0 ? (
+                      <div className="text-center py-20">
+                        <Upload size={48} className="mx-auto text-gray-300 mb-4" />
+                        <p className="text-gray-500 text-lg">No photos uploaded yet.</p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {gallery.map((image, idx) => (
+                          <div
+                            key={idx}
+                            className="group relative overflow-hidden rounded-2xl aspect-square shadow-md hover:shadow-xl transition-all border border-gray-100 cursor-pointer"
+                          >
+                            <img
+                              src={image}
+                              alt={`Event Photo ${idx + 1}`}
+                              onClick={() => setLightboxIndex(idx)}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            
+                            {/* Zoom button */}
+                            <button
+                              onClick={() => setLightboxIndex(idx)}
+                              className="absolute top-4 left-4 p-2 bg-black/40 hover:bg-black/60 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all"
+                            >
+                              <Maximize2 size={16} />
+                            </button>
+
+                            {/* Delete button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                if (window.confirm("Are you sure you want to delete this photo?")) {
+                                  removeGalleryImage(idx)
+                                }
+                              }}
+                              className="absolute bottom-4 right-4 p-2.5 bg-red-500 hover:bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all transform hover:scale-110"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  ) : (
+                    videos.length === 0 ? (
+                      <div className="text-center py-20">
+                        <Upload size={48} className="mx-auto text-gray-300 mb-4" />
+                        <p className="text-gray-500 text-lg">No videos uploaded yet.</p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {videos.map((video, idx) => (
+                          <div
+                            key={idx}
+                            className="group relative overflow-hidden rounded-2xl aspect-video bg-gray-950 shadow-md hover:shadow-xl transition-all border border-gray-900 cursor-pointer"
+                            onClick={() => setActiveVideoUrl(video)}
+                          >
+                            <video
+                              src={video}
+                              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-350 animate-fade-in"
+                              muted
+                              playsInline
+                            />
+                            
+                            {/* Play overlay button */}
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                              <div className="w-14 h-14 bg-rose-500/90 hover:bg-rose-600 text-white rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
+                                <Play size={26} className="fill-white translate-x-0.5" />
+                              </div>
+                            </div>
+
+                            {/* Delete button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                if (window.confirm("Are you sure you want to delete this video?")) {
+                                  removeGalleryVideo(idx)
+                                }
+                              }}
+                              className="absolute bottom-4 right-4 p-2.5 bg-red-500 hover:bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all transform hover:scale-110"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  )}
+                </div>
+
+              </div>
+            </div>
+          )}
+
+          {/* Lightbox for Photos */}
+          {lightboxIndex !== null && (
+            <div className="fixed inset-0 bg-black/95 z-[60] flex items-center justify-center" onClick={() => setLightboxIndex(null)}>
+              <button 
+                onClick={() => setLightboxIndex(null)}
+                className="absolute top-6 right-6 text-white/70 hover:text-white p-2 hover:bg-white/10 rounded-full transition-all"
+              >
+                <X size={32} />
+              </button>
+              
+              {/* Prev Button */}
+              {lightboxIndex > 0 && (
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex(lightboxIndex - 1);
+                  }}
+                  className="absolute left-6 text-white/70 hover:text-white p-3 hover:bg-white/10 rounded-full transition-all text-3xl font-bold"
+                >
+                  &#10094;
+                </button>
+              )}
+
+              <img 
+                src={gallery[lightboxIndex]} 
+                alt={`Lightbox image`} 
+                onClick={(e) => e.stopPropagation()}
+                className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-200"
+              />
+
+              {/* Next Button */}
+              {lightboxIndex < gallery.length - 1 && (
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex(lightboxIndex + 1);
+                  }}
+                  className="absolute right-6 text-white/70 hover:text-white p-3 hover:bg-white/10 rounded-full transition-all text-3xl font-bold"
+                >
+                  &#10095;
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Video Player Modal */}
+          {activeVideoUrl !== null && (
+            <div className="fixed inset-0 bg-black/95 z-[60] flex items-center justify-center p-4" onClick={() => setActiveVideoUrl(null)}>
+              <button 
+                onClick={() => setActiveVideoUrl(null)}
+                className="absolute top-6 right-6 text-white/70 hover:text-white p-2 hover:bg-white/10 rounded-full transition-all"
+              >
+                <X size={32} />
+              </button>
+              
+              <div className="w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black" onClick={(e) => e.stopPropagation()}>
+                <video 
+                  src={activeVideoUrl} 
+                  controls 
+                  autoPlay 
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          )}
 
           {/* Visual Budget Tracker and Weather Forecast */}
           {!bookingsLoading && userBookings.length > 0 && (

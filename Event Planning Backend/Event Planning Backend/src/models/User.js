@@ -8,6 +8,9 @@ const UserSchema = new mongoose.Schema({
   city: { type: String, default: 'Mumbai' },
   bio: { type: String, default: 'Event enthusiast and planner' },
   avatar: { type: String, default: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop' },
+  preferences: { type: [String], default: [] },
+  gallery: { type: [String], default: [] },
+  videos: { type: [String], default: [] },
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', UserSchema)

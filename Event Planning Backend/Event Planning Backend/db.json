@@ -10,7 +10,26 @@
       "state": "Jharkhand",
       "city": "Ranchi",
       "bio": "Event enthusiast and planner",
-      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+      "preferences": [
+        "Weddings"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&h=450&fit=crop"
+      ],
+      "videos": [
+        "https://assets.mixkit.co/videos/preview/mixkit-wedding-couple-dancing-under-lights-40019-large.mp4",
+        "https://assets.mixkit.co/videos/preview/mixkit-champagne-glasses-toast-at-a-celebration-40003-large.mp4",
+        "https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-dj-playing-music-at-a-club-42526-large.mp4"
+      ]
     },
     {
       "email": "goraikishor404@gmail.com",
@@ -44,6 +63,18 @@
       "_id": "6a25486964d7edc1ea1dac10",
       "createdAt": "2026-06-07T10:31:05.783Z",
       "updatedAt": "2026-06-07T10:31:05.783Z"
+    },
+    {
+      "event": "6a2510a3a92aa03fb948cdb1",
+      "date": "2026-02-22",
+      "venue": "Leela Palace Udaipur",
+      "guests": 1000,
+      "name": "kishor gorai ",
+      "email": "Kishorgorai2004@gmail.com",
+      "status": "pending",
+      "_id": "6a27e1fbe016c25e974261f8",
+      "createdAt": "2026-06-09T09:50:51.241Z",
+      "updatedAt": "2026-06-09T09:50:51.241Z"
     }
   ],
   "events": [
@@ -378,6 +409,28 @@
       "timestamp": "2026-06-09T03:47:48.463Z",
       "createdAt": "2026-06-09T03:47:48.467Z",
       "updatedAt": "2026-06-09T03:47:48.467Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "CREATE_BOOKING",
+      "details": "Created a booking at Leela Palace Udaipur for date 2026-02-22 with 1000 guests",
+      "_id": "6a27e1fbe016c25e974261f9",
+      "timestamp": "2026-06-09T09:50:51.249Z",
+      "createdAt": "2026-06-09T09:50:51.250Z",
+      "updatedAt": "2026-06-09T09:50:51.250Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Jharkhand, City=Ranchi",
+      "_id": "6a27e69a0f1b0171e6d00bc9",
+      "timestamp": "2026-06-09T10:10:34.368Z",
+      "createdAt": "2026-06-09T10:10:34.370Z",
+      "updatedAt": "2026-06-09T10:10:34.371Z"
     }
   ]
 }

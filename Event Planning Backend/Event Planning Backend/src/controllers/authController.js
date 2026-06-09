@@ -78,10 +78,10 @@ exports.logout = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
-    const { name, state, city, bio, avatar } = req.body
+    const { name, state, city, bio, avatar, preferences, gallery, videos } = req.body
     const updated = await User.findByIdAndUpdate(
       req.userId,
-      { name, state, city, bio, avatar },
+      { name, state, city, bio, avatar, preferences, gallery, videos },
       { new: true }
     ).select('-password')
     
