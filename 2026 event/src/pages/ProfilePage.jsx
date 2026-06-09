@@ -418,12 +418,14 @@ export default function ProfilePage() {
           </div>
 
           {/* Live Event Countdown */}
-          <div className="mb-8">
-            <EventCountdown 
-              eventDate={upcomingEventDate}
-              eventTitle={upcomingEventTitle}
-            />
-          </div>
+          {!bookingsLoading && userBookings.length > 0 && (
+            <div className="mb-8">
+              <EventCountdown 
+                eventDate={upcomingEventDate}
+                eventTitle={upcomingEventTitle}
+              />
+            </div>
+          )}
 
           {/* My Booked Events Section */}
           <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-xl border border-white/50">
@@ -491,12 +493,14 @@ export default function ProfilePage() {
           </div>
 
           {/* Planning Progress Ring */}
-          <div className="mb-8">
-            <PlanningProgressRing completionPercentage={65} eventType="Wedding" />
-          </div>
+          {!bookingsLoading && userBookings.length > 0 && (
+            <div className="mb-8">
+              <PlanningProgressRing completionPercentage={65} eventType="Wedding" />
+            </div>
+          )}
 
           {/* Dynamic Location Section */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-xl border border-white/50">
+          <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-xl border border-white/50 relative z-20">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <MapPin size={28} className="text-rose-500" />
               Select Your Location
@@ -526,7 +530,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Event Preferences */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-xl border border-white/50">
+          <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-xl border border-white/50 relative z-10">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Event Preferences</h2>
             <div className="flex flex-wrap gap-3">
               {EVENT_PREFERENCES.map((pref) => (
@@ -595,19 +599,22 @@ export default function ProfilePage() {
             )}
           </div>
 
-          {/* Visual Budget Tracker */}
-          <div className="mt-8">
-            <BudgetTracker />
-          </div>
+          {/* Visual Budget Tracker and Weather Forecast */}
+          {!bookingsLoading && userBookings.length > 0 && (
+            <>
+              <div className="mt-8">
+                <BudgetTracker />
+              </div>
 
-          {/* Weather Section */}
-          <div className="mt-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Event Weather Forecast</h2>
-            <WeatherWidget 
-              city={userProfile.city}
-              eventDate={upcomingEventDate}
-            />
-          </div>
+              <div className="mt-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Event Weather Forecast</h2>
+                <WeatherWidget 
+                  city={userProfile.city}
+                  eventDate={upcomingEventDate}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
       <Footer />

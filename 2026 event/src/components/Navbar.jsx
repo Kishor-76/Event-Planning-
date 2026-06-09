@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, User, LayoutDashboard, LogOut, ChevronDown } from 'lucide-react'
 import { AuthContext } from '../context/AuthContext'
+import { RenderAvatar } from './Avatar'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -88,10 +89,10 @@ export default function Navbar() {
                     }}
                     className="flex items-center gap-2 focus:outline-none group cursor-pointer"
                   >
-                    <img
-                      src={user.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100'}
-                      alt={user.name}
-                      className="w-10 h-10 rounded-full object-cover border-2 border-rose-500/25 group-hover:border-rose-500 transition-all shadow-sm"
+                    <RenderAvatar
+                      avatar={user.avatar}
+                      name={user.name}
+                      className="w-10 h-10 rounded-full border-2 border-rose-500/25 group-hover:border-rose-500 transition-all shadow-sm"
                     />
                     <span className={`text-sm font-semibold max-w-[120px] truncate ${textColor}`}>
                       {user.name}
@@ -190,10 +191,10 @@ export default function Navbar() {
             {user ? (
               <div className="border-t border-gray-100 pt-4 space-y-3">
                 <div className="flex items-center gap-3 px-1 py-1">
-                  <img
-                    src={user.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100'}
-                    alt={user.name}
-                    className="w-10 h-10 rounded-full object-cover border-2 border-rose-500/20 shadow-sm"
+                  <RenderAvatar
+                    avatar={user.avatar}
+                    name={user.name}
+                    className="w-10 h-10 rounded-full border-2 border-rose-500/20 shadow-sm"
                   />
                   <div>
                     <p className="font-semibold text-gray-900 text-sm truncate">{user.name}</p>

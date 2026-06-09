@@ -1,18 +1,44 @@
 import { useState, useEffect } from 'react'
 import { MapPin, ChevronDown, Check } from 'lucide-react'
 
-// Sample data: 10 Indian states with their respective cities
+// All 28 States and 8 Union Territories of India with their respective major cities
 const INDIA_LOCATIONS = {
-  'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Aurangabad', 'Nashik'],
-  'Delhi': ['New Delhi', 'Old Delhi'],
-  'Karnataka': ['Bangalore', 'Mysore', 'Mangalore', 'Hubli'],
-  'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai', 'Salem'],
-  'Telangana': ['Hyderabad', 'Warangal', 'Nizamabad'],
-  'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Agra', 'Varanasi'],
-  'West Bengal': ['Kolkata', 'Darjeeling', 'Durgapur'],
-  'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
-  'Rajasthan': ['Jaipur', 'Udaipur', 'Jodhpur', 'Ajmer'],
-  'Punjab': ['Chandigarh', 'Amritsar', 'Ludhiana'],
+  'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore', 'Tirupati'],
+  'Arunachal Pradesh': ['Itanagar', 'Naharlagun', 'Pasighat', 'Tawang'],
+  'Assam': ['Guwahati', 'Dibrugarh', 'Silchar', 'Jorhat', 'Tezpur'],
+  'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur', 'Darbhanga'],
+  'Chhattisgarh': ['Raipur', 'Bilaspur', 'Bhilai', 'Durg', 'Korba'],
+  'Goa': ['Panaji', 'Margao', 'Vasco da Gama', 'Mapusa', 'Ponda'],
+  'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot', 'Gandhinagar'],
+  'Haryana': ['Gurugram', 'Faridabad', 'Panipat', 'Ambala', 'Rohtak'],
+  'Himachal Pradesh': ['Shimla', 'Dharamshala', 'Solan', 'Mandi', 'Kullu'],
+  'Jharkhand': ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro', 'Deoghar'],
+  'Karnataka': ['Bangalore', 'Mysore', 'Hubli', 'Mangalore', 'Belgaum'],
+  'Kerala': ['Trivandrum', 'Kochi', 'Kozhikode', 'Thrissur', 'Alappuzha'],
+  'Madhya Pradesh': ['Indore', 'Bhopal', 'Jabalpur', 'Gwalior', 'Ujjain'],
+  'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Thane', 'Nashik', 'Aurangabad'],
+  'Manipur': ['Imphal', 'Thoubal', 'Churachandpur', 'Senapati'],
+  'Meghalaya': ['Shillong', 'Tura', 'Jowai', 'Nongpoh'],
+  'Mizoram': ['Aizawl', 'Lunglei', 'Champhai', 'Serchhip'],
+  'Nagaland': ['Dimapur', 'Kohima', 'Mokokchung', 'Tuensang'],
+  'Odisha': ['Bhubaneswar', 'Cuttack', 'Rourkela', 'Sambalpur', 'Puri'],
+  'Punjab': ['Ludhiana', 'Amritsar', 'Jalandhar', 'Patiala', 'Bathinda'],
+  'Rajasthan': ['Jaipur', 'Jodhpur', 'Udaipur', 'Kota', 'Ajmer', 'Bikaner'],
+  'Sikkim': ['Gangtok', 'Namchi', 'Geyzing', 'Mangan'],
+  'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai', 'Trichy', 'Salem'],
+  'Telangana': ['Hyderabad', 'Warangal', 'Nizamabad', 'Karimnagar', 'Khammam'],
+  'Tripura': ['Agartala', 'Dharmanagar', 'Udaipur', 'Kailasahar'],
+  'Uttarakhand': ['Dehradun', 'Haridwar', 'Rishikesh', 'Haldwani', 'Roorkee'],
+  'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Noida', 'Ghaziabad', 'Varanasi', 'Agra', 'Prayagraj'],
+  'West Bengal': ['Kolkata', 'Howrah', 'Siliguri', 'Durgapur', 'Asansol'],
+  'Andaman and Nicobar Islands': ['Port Blair'],
+  'Chandigarh': ['Chandigarh'],
+  'Dadra and Nagar Haveli and Daman and Diu': ['Daman', 'Diu', 'Silvassa'],
+  'Delhi': ['New Delhi', 'Old Delhi', 'Dwarka', 'Rohini'],
+  'Jammu and Kashmir': ['Srinagar', 'Jammu', 'Anantnag', 'Kathua'],
+  'Ladakh': ['Leh', 'Kargil'],
+  'Lakshadweep': ['Kavaratti'],
+  'Puducherry': ['Puducherry', 'Karaikal', 'Mahe', 'Yanam']
 }
 
 export default function LocationSelector({ onLocationChange, initialState = '', initialCity = '' }) {
@@ -131,7 +157,7 @@ export default function LocationSelector({ onLocationChange, initialState = '', 
             </button>
 
             {isCityOpen && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-purple-200 rounded-2xl shadow-xl z-10 max-h-60 overflow-y-auto">
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-purple-200 rounded-2xl shadow-xl z-30 max-h-60 overflow-y-auto">
                 {cities.map((city) => (
                   <button
                     key={city}

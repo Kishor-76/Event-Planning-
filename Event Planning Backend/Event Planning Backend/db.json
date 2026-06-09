@@ -6,7 +6,11 @@
       "name": "kishor gorai ",
       "_id": "6a251c04a60ff297240a5fa5",
       "createdAt": "2026-06-07T07:21:40.383Z",
-      "updatedAt": "2026-06-07T07:21:40.383Z"
+      "updatedAt": "2026-06-07T07:21:40.383Z",
+      "state": "Jharkhand",
+      "city": "Ranchi",
+      "bio": "Event enthusiast and planner",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
     },
     {
       "email": "goraikishor404@gmail.com",
@@ -187,6 +191,193 @@
       "timestamp": "2026-06-08T03:36:41.215Z",
       "createdAt": "2026-06-08T03:36:41.220Z",
       "updatedAt": "2026-06-08T03:36:41.220Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "LOGIN",
+      "details": "User logged in successfully",
+      "_id": "6a26cf1ccc74b3f0c8c6adb4",
+      "timestamp": "2026-06-08T14:18:04.809Z",
+      "createdAt": "2026-06-08T14:18:04.812Z",
+      "updatedAt": "2026-06-08T14:18:04.812Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Maharashtr, City=",
+      "_id": "6a278845c3208cbdd4b7c7e8",
+      "timestamp": "2026-06-09T03:28:05.129Z",
+      "createdAt": "2026-06-09T03:28:05.135Z",
+      "updatedAt": "2026-06-09T03:28:05.136Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Maharasht, City=",
+      "_id": "6a278845c3208cbdd4b7c7e9",
+      "timestamp": "2026-06-09T03:28:05.316Z",
+      "createdAt": "2026-06-09T03:28:05.318Z",
+      "updatedAt": "2026-06-09T03:28:05.318Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Maharash, City=",
+      "_id": "6a278845c3208cbdd4b7c7ea",
+      "timestamp": "2026-06-09T03:28:05.373Z",
+      "createdAt": "2026-06-09T03:28:05.374Z",
+      "updatedAt": "2026-06-09T03:28:05.374Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Maharas, City=",
+      "_id": "6a278845c3208cbdd4b7c7eb",
+      "timestamp": "2026-06-09T03:28:05.392Z",
+      "createdAt": "2026-06-09T03:28:05.393Z",
+      "updatedAt": "2026-06-09T03:28:05.393Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Mahara, City=",
+      "_id": "6a278845c3208cbdd4b7c7ec",
+      "timestamp": "2026-06-09T03:28:05.418Z",
+      "createdAt": "2026-06-09T03:28:05.419Z",
+      "updatedAt": "2026-06-09T03:28:05.419Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Mahar, City=",
+      "_id": "6a278845c3208cbdd4b7c7ed",
+      "timestamp": "2026-06-09T03:28:05.439Z",
+      "createdAt": "2026-06-09T03:28:05.440Z",
+      "updatedAt": "2026-06-09T03:28:05.440Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Maha, City=",
+      "_id": "6a278845c3208cbdd4b7c7ee",
+      "timestamp": "2026-06-09T03:28:05.491Z",
+      "createdAt": "2026-06-09T03:28:05.492Z",
+      "updatedAt": "2026-06-09T03:28:05.492Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Maha, City=",
+      "_id": "6a278845c3208cbdd4b7c7ef",
+      "timestamp": "2026-06-09T03:28:05.518Z",
+      "createdAt": "2026-06-09T03:28:05.519Z",
+      "updatedAt": "2026-06-09T03:28:05.519Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Mah, City=",
+      "_id": "6a278845c3208cbdd4b7c7f0",
+      "timestamp": "2026-06-09T03:28:05.552Z",
+      "createdAt": "2026-06-09T03:28:05.552Z",
+      "updatedAt": "2026-06-09T03:28:05.552Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Ma, City=",
+      "_id": "6a278845c3208cbdd4b7c7f1",
+      "timestamp": "2026-06-09T03:28:05.581Z",
+      "createdAt": "2026-06-09T03:28:05.582Z",
+      "updatedAt": "2026-06-09T03:28:05.582Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=M, City=",
+      "_id": "6a278845c3208cbdd4b7c7f2",
+      "timestamp": "2026-06-09T03:28:05.619Z",
+      "createdAt": "2026-06-09T03:28:05.619Z",
+      "updatedAt": "2026-06-09T03:28:05.619Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=jh, City=",
+      "_id": "6a27884937dd272fdbf4b717",
+      "timestamp": "2026-06-09T03:28:09.298Z",
+      "createdAt": "2026-06-09T03:28:09.299Z",
+      "updatedAt": "2026-06-09T03:28:09.308Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=jha, City=",
+      "_id": "6a27884937dd272fdbf4b718",
+      "timestamp": "2026-06-09T03:28:09.463Z",
+      "createdAt": "2026-06-09T03:28:09.464Z",
+      "updatedAt": "2026-06-09T03:28:09.464Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=jharkhand, City=",
+      "_id": "6a27885496c38a903d65a132",
+      "timestamp": "2026-06-09T03:28:20.277Z",
+      "createdAt": "2026-06-09T03:28:20.278Z",
+      "updatedAt": "2026-06-09T03:28:20.278Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Jharkhand, City=",
+      "_id": "6a2788b4c377d4273b87d037",
+      "timestamp": "2026-06-09T03:29:56.969Z",
+      "createdAt": "2026-06-09T03:29:56.972Z",
+      "updatedAt": "2026-06-09T03:29:56.972Z"
+    },
+    {
+      "userId": "6a251c04a60ff297240a5fa5",
+      "userName": "kishor gorai ",
+      "userEmail": "Kishorgorai2004@gmail.com",
+      "action": "UPDATE_PROFILE",
+      "details": "Updated profile details: State=Jharkhand, City=Ranchi",
+      "_id": "6a278ce48683a093fa982587",
+      "timestamp": "2026-06-09T03:47:48.463Z",
+      "createdAt": "2026-06-09T03:47:48.467Z",
+      "updatedAt": "2026-06-09T03:47:48.467Z"
     }
   ]
 }
