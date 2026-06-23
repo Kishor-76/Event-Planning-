@@ -7,6 +7,8 @@
   --color-soft-grey: #F5F5F5;
   --color-gray-50: #F9FAFB;
   --color-gray-100: #F5F5F5;
+  --color-slate-850: #1e293b;
+  --color-slate-950: #090d16;
 }
 
 html {
@@ -16,6 +18,26 @@ html {
 body {
   margin: 0;
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  background-color: #F5F5F5;
+  background-color: #090d16;
+  color: #f1f5f9;
   min-height: 100vh;
+}
+
+/* Custom premium scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF69B4;
 }
