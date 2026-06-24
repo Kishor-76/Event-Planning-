@@ -9,7 +9,8 @@
     "build": "cd \"2026 event\" && npm run build",
     "lint": "cd \"2026 event\" && npm run lint",
     "preview": "cd \"2026 event\" && npm run preview",
-    "seed": "cd \"Event Planning Backend/Event Planning Backend\" && npm run seed"
+    "seed": "cd \"Event Planning Backend/Event Planning Backend\" && npm run seed",
+    "install-all": "npm install && cd \"2026 event\" && npm install && cd \"../Admin Dashboard\" && npm install && cd \"../Event Planning Backend/Event Planning Backend\" && npm install"
   },
   "devDependencies": {
     "concurrently": "^10.0.3"
