@@ -95,7 +95,8 @@ class MockQuery {
       const populateDoc = (doc) => {
         if (!doc) return doc
         if (field === 'event' && doc.event) {
-          const matchedEvent = db.events.find(e => e._id.toString() === doc.event.toString() || e.id?.toString() === doc.event.toString())
+          const targetId = typeof doc.event === 'object' ? (doc.event._id || doc.event.id) : doc.event
+          const matchedEvent = db.events.find(e => e._id?.toString() === targetId?.toString() || e.id?.toString() === targetId?.toString())
           return { ...doc, event: matchedEvent || doc.event }
         }
         return doc
