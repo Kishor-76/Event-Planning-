@@ -55,8 +55,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 text-2xl font-bold text-rose-500 hover:scale-105 transition-transform">
-            <img src={logo} alt="Eventify Logo" className="w-8 h-8 object-contain rounded-lg shadow-sm" />
+          <Link to="/" className="flex items-center gap-3 text-3xl font-extrabold text-rose-500 hover:scale-105 transition-transform">
+            <img src={logo} alt="Eventify Logo" className="w-10 h-10 object-contain rounded-lg shadow-md" />
             <span className="bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent">Eventify</span>
           </Link>
 

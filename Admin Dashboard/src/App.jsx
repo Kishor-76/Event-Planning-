@@ -819,9 +819,9 @@ export default function App() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-xl shadow-md border-b border-slate-800/80 h-16 md:h-20 flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <img src={logo} alt="Eventify Logo" className="w-8 h-8 object-contain rounded-lg shadow-sm" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent">Eventify</span>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Eventify Logo" className="w-10 h-10 object-contain rounded-lg shadow-md" />
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent">Eventify</span>
             <span className="px-2.5 py-0.5 bg-rose-500/20 text-rose-400 rounded-full text-xs font-bold uppercase tracking-wider">
               Admin
             </span>
